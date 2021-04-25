@@ -1,0 +1,69 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Excercise 1
+
+
+mean: the sum of the items divided by the number of items. <br>
+median: the middle item in a sorted list of items <br>
+mode: the item with the most frequency <br>
+variance: the average sum of the difference from the mean squared. <br>
+standard deviation: the square root of the variance. <br>
+histogram: a graph where bars represent the frequency of an item. <br>
+Normal Distribution: a distribution that forms a bell shape where the center has the most frequency and the tails on both sides are less frequent. <br>
+Poisson Distribution: a distribution where one item is more frequent than the rest of the possible outcomes. It defers from a Normal Distribution as it does not always look symmetric.
+
+
+# Excercise 3
+
+```{r}
+r_datasets = data()
+```
+
+```{r}
+r_datasets
+```
+
+```{r}
+head(PlantGrowth)
+```
+
+```{r}
+summary(PlantGrowth)
+```
+
+```{r}
+library(ggplot2)
+ggplot(PlantGrowth, aes(y=weight)) + geom_boxplot(aes(color = group, size=5))
+```
+
+```{r}
+ggplot(PlantGrowth, aes(y=weight)) + geom_boxplot(aes(color = 'balck', size=5))
+```
+
+The dataset I choose is PlantGrowth. It contains the weight of plants from three different groups. The Average weight of all plants is 5.073 while the median is 5.155. This means that 50% of the plants weight more than 5.155, and the weight for a plant is on average around 5.073. 
+
+
+# Excercise 4
+
+```{r}
+head(trees)
+```
+
+```{r}
+hist(trees$Height)
+```
+
+For this exercise I selected the trees dataset. I plotted the histogram of the Height column. Here we can see how the distribution looks normal as most trees fall in the 70-80 height while fewer fall on the tail ends creating a bell curve.

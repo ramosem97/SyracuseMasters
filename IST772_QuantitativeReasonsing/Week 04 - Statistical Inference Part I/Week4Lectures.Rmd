@@ -1,0 +1,166 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Week 4 Intro
+
+
+Inference is an inductive reasoning process that begins with some information about specific cases and leads to some conclusion that is more general. Statistical inference takes this same kind of logical thinking a step further by dealing systematically with situations where we have uncertain or incomplete information. Unlike deductive reasoning, conclusions that we draw inductively from samples of data are never fixed or firm. We model uncertainty as carefully as we can, but we can never be 100% sure of anything when we are using statistical inference. 
+
+We have spent the last four weeks preparing to use the tools of statistical inference. Our considerations of probability two weeks ago gave us the tools to consider sampling distributions last week. Sampling distributions provide the method we need for building models of uncertainty. This week, we formalize our capability to use sampling distributions by creating confidence intervals. A confidence interval is a band of uncertainty around a statistical point estimate (e.g., a mean). Similar to the concepts from last week, a confidence interval is a statement about probabilities over the long run and not a about the specific data sample we have at hand. Any particular confidence interval we calculate may or may not contain the true population value: we will never know for sure.
+
+
+# 4.2: Contrasting Deduction and Induction
+
+
+Thinking is so important. I want to talk about two ways of doing it. They are deduction and induction. Some people refer to deductive thinking as top-down thinking. We start with some general principle and we work our way down to address specific cases.
+
+So for example, we start with the principle that items that are shelved in the grocery store near the cash register are bought on impulse. And then we add to that the principle that impulse buys are generally for items that are costing less than 5 dollars. We can conclude then from those two principles that if we shelve some snack items costing less than 5 dollars near the register, then we'll get a lot of impulse buys of those snack items.
+
+Now, you might wonder who came up with the general principle that items that were shelved at the cash register result in impulse buys. The answer in all likelihood is that someone did it inductively. Induction is bottom-up thinking, reasoning from a set of examples that are observed to some higher principle. So it's likely that some person that worked in a store noticed that, as people came up to the cash register, they just grabbed that candy off there and threw it onto their cart, even though they had not planned on buying that.
+
+Now, it's possible, of course, that some people do plan on popping right over to the cash register, and they've got a list of the candy that they're going to get. And that would be the exception that goes with the inductive rule. And that shows you that induction is largely a probabilistic type of reasoning.
+
+So, though, induction comes from the idea that the workers in the store induced this probabilistic rule by noticing what seemed true in most cases. And most of statistical inference is based on this idea of induction, of observing something that's a pattern, that may not be a perfect pattern, but it's enough of a pattern that we can draw some conclusions from it.
+
+So this leads us to a very important rule that I want you to internalize and always keep in mind. And never make this mistake when you're writing about data. You cannot prove anything from samples of data or by using statistical inference. You cannot prove anything. It's so important to think about this idea. It's intimately tied up with the scientific method. It doesn't mean that there is no truth, but it does mean that we have to weigh our evidence carefully in order to know how sure we are about something and to realize that we can never be absolutely sure about something when we're working with statistical data.
+
+Inferential statistics gives us the opportunity to be precise and systematic about certainty and uncertainty. But there will always be uncertainty when we're working with data. So in the rest of the course and beyond, make sure that when you phrase your results, when you're talking about an analysis that you have done, that you'd never say that you've proved something from the statistical analysis results that you're presenting.
+
+
+# 4.3: Comparing Means of Two Independent Samples
+
+```{r}
+head(data()$results)
+```
+
+```{r}
+str(co2)
+```
+
+```{r}
+?co2
+```
+
+```{r}
+# install.packages('psych')
+```
+
+```{r}
+library(psych)
+head(data(package='psych')$results)
+```
+
+```{r}
+data(Dwyer)
+str(Dwyer)
+?Dwyer
+head(Dwyer)
+```
+
+## MTCars Dataset
+
+```{r}
+str(mtcars)
+```
+
+```{r}
+?mtcars
+str(mtcars)
+summary(mtcars)
+describe(mtcars)
+```
+
+```{r}
+mean(mtcars$mpg[mtcars$am==0]) # Automatic Transmissions
+sd(mtcars$mpg[mtcars$am==0])
+```
+
+```{r}
+mean(mtcars$mpg[mtcars$am==1]) # Manual Transmissions
+sd(mtcars$mpg[mtcars$am==1])
+```
+
+```{r}
+boxplot(mpg ~ am, data=mtcars) # Boxplot of mpg, group by am
+```
+
+# 4.4: A Simulation of Uncertainty: Repetitive Sampling to Simulate Distribution of Mean Differences
+
+```{r}
+sample(mtcars$mpg[mtcars$am == 0], size=19, replace=TRUE)
+```
+
+```{r}
+sample(mtcars$mpg[mtcars$am == 1], size=13, replace=TRUE)
+```
+
+```{r}
+meanDiffs <- replicate(100, 
+                      mean(sample(mtcars$mpg[mtcars$am == 0], size=19, replace=TRUE)) 
+                     - mean(sample(mtcars$mpg[mtcars$am == 1], size=13, replace=TRUE)))
+```
+
+```{r}
+mean(mtcars$mpg[mtcars$am == 0])
+mean(mtcars$mpg[mtcars$am == 1])
+```
+
+```{r}
+hist(meanDiffs)
+```
+
+```{r}
+length(mtcars$mpg[ mtcars$am == 0 ])
+```
+
+```{r}
+nrow(mtcars)
+```
+
+```{r}
+mean( sample(mtcars$mpg[ mtcars$am == 0 ],size=19,replace=TRUE))
+```
+
+# 4.5: Our First Inferential Test
+
+```{r}
+t.test(mtcars$mpg[ mtcars$am == 0 ], mtcars$mpg[ mtcars$am == 1])
+```
+
+# 4.6: What is a Confidence Interval?
+
+```{r}
+plot(seq(-4, 4, .01), dnorm(seq(-4, 4, .01)))
+abline(v=qnorm(.975))
+abline(v=qnorm(.025))
+```
+
+```{r}
+plot(seq(-4, 4, .01), dt(seq(-4, 4, .01), df=30))
+abline(v=qt(.975, df=30))
+abline(v=qt(.025, df=30))
+```
+
+# 4.8: Run Your Own CI
+
+```{r}
+#VS = 0: v-shaped, VS = 1: straight
+t.test(mtcars$mpg[mtcars$vs==0],mtcars$mpg[mtcars$vs==1])
+```
+
+The mean mpg of V-Shaped Engines is ~16.62 while the mean of Straight Engines is ~24.56. We are 95% confident that the true mean of the difference MPG between V-Shaped and Straight Engines lies between -11.5 and -4.42. This means that if we replicate the experiment 100 times, the mean of the experiment will lie between -11.5 and -4.42. This also means that we are 95% confident that the difference in means is not equal to 0.
+
+
+# 

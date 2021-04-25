@@ -1,0 +1,1355 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Houses}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Introduction}\label{introduction}
+
+    Lab 2 focuses on Time Series Forecasting. First we focus our attention
+on four metro areas in Arkansas. The metro areas have different zipcodes
+associated with them, so we have to aggragate the data by metro area in
+order to be able to visualize the trends over time per metro area.
+Secondly, the lab asks us to find which three zipcodes we should invest
+in. The lab does not crearly state the metrics necessary to do choose,
+but through simple analysis, we can determine the best metric for the
+job.
+
+    \section{Imports}\label{imports}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}  \PY{c+c1}{\PYZsh{} statistical models (including regression)}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf}  \PY{c+c1}{\PYZsh{} R\PYZhy{}like model specification}
+\end{Verbatim}
+
+
+    \section{Path}\label{path}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{pwd}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} '/Users/ramosem/Documents/SyracuseUniversity/4th\_Quarter/IST718/Lab2'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{path} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/ramosem/Documents/SyracuseUniversity/4th\PYZus{}Quarter/IST718/Lab2/}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \section{Read Data}\label{read-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{fileName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Zip\PYZus{}Zhvi\PYZus{}SingleFamilyResidence}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{path} \PY{o}{+} \PY{n}{fileName} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    RegionID  SizeRank  RegionName RegionType StateName State      City  \textbackslash{}
+        0     61639         0       10025        Zip        NY    NY  New York   
+        1     84654         1       60657        Zip        IL    IL   Chicago   
+        2     61637         2       10023        Zip        NY    NY  New York   
+        3     91982         3       77494        Zip        TX    TX      Katy   
+        4     84616         4       60614        Zip        IL    IL   Chicago   
+        
+                                      Metro       CountyName  1996-01-31  {\ldots}  \textbackslash{}
+        0       New York-Newark-Jersey City  New York County         NaN  {\ldots}   
+        1          Chicago-Naperville-Elgin      Cook County    364892.0  {\ldots}   
+        2       New York-Newark-Jersey City  New York County         NaN  {\ldots}   
+        3  Houston-The Woodlands-Sugar Land    Harris County    200475.0  {\ldots}   
+        4          Chicago-Naperville-Elgin      Cook County    546663.0  {\ldots}   
+        
+           2019-06-30  2019-07-31  2019-08-31  2019-09-30  2019-10-31  2019-11-30  \textbackslash{}
+        0   1413747.0   1405862.0   1402547.0   1390420.0   1381621.0   1375725.0   
+        1    974693.0    975616.0    975734.0    975251.0    974238.0    973104.0   
+        2   1528603.0   1514894.0   1502233.0   1492429.0   1486122.0   1480426.0   
+        3    335536.0    335878.0    335940.0    336092.0    336119.0    336083.0   
+        4   1207765.0   1208853.0   1208481.0   1206304.0   1204013.0   1201182.0   
+        
+           2019-12-31  2020-01-31  2020-02-29  2020-03-31  
+        0   1374714.0   1381453.0   1385737.0   1389268.0  
+        1    971908.0    972038.0    973671.0    975642.0  
+        2   1476509.0   1478980.0   1479301.0   1474994.0  
+        3    336154.0    335860.0    336037.0    336483.0  
+        4   1198879.0   1198277.0   1199900.0   1200980.0  
+        
+        [5 rows x 300 columns]
+\end{Verbatim}
+            
+    \section{PreAnalyze}\label{preanalyze}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 30464
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}             RegionID      SizeRank    RegionName    1996-01-31    1996-02-29  \textbackslash{}
+        count   30464.000000  30464.000000  30464.000000  1.322400e+04  1.347200e+04   
+        mean    80411.444032  15971.949875  48773.301110  1.287668e+05  1.284274e+05   
+        std     25500.467961   9602.814124  27437.793823  8.932606e+04  8.923079e+04   
+        min     58001.000000      0.000000    501.000000  1.067200e+04  1.065500e+04   
+        25\%     68822.750000   7688.000000  25867.250000  7.188575e+04  7.167675e+04   
+        50\%     79170.500000  15497.000000  48313.500000  1.083435e+05  1.078815e+05   
+        75\%     89238.250000  24073.000000  71740.500000  1.604298e+05  1.598525e+05   
+        max    753844.000000  35187.000000  99929.000000  1.749532e+06  1.744909e+06   
+        
+                 1996-03-31    1996-04-30    1996-05-31    1996-06-30    1996-07-31  \textbackslash{}
+        count  1.351000e+04  1.353200e+04  1.361700e+04  1.365200e+04  1.367500e+04   
+        mean   1.283393e+05  1.283755e+05  1.284372e+05  1.284450e+05  1.287817e+05   
+        std    8.908503e+04  8.891757e+04  8.878505e+04  8.866373e+04  9.173599e+04   
+        min    1.067300e+04  1.066800e+04  1.067700e+04  1.059500e+04  1.047700e+04   
+        25\%    7.167450e+04  7.179450e+04  7.187400e+04  7.197175e+04  7.207500e+04   
+        50\%    1.077805e+05  1.078935e+05  1.078990e+05  1.080335e+05  1.082100e+05   
+        75\%    1.596290e+05  1.595368e+05  1.595160e+05  1.598925e+05  1.601715e+05   
+        max    1.726037e+06  1.696812e+06  1.649586e+06  1.602308e+06  2.920398e+06   
+        
+               {\ldots}    2019-06-30    2019-07-31    2019-08-31    2019-09-30  \textbackslash{}
+        count  {\ldots}  3.046400e+04  3.046400e+04  3.046400e+04  3.046400e+04   
+        mean   {\ldots}  2.316270e+05  2.322013e+05  2.328094e+05  2.334704e+05   
+        std    {\ldots}  2.744219e+05  2.745258e+05  2.745434e+05  2.747149e+05   
+        min    {\ldots}  1.051600e+04  1.056000e+04  1.059900e+04  1.067800e+04   
+        25\%    {\ldots}  1.035932e+05  1.040092e+05  1.043135e+05  1.046772e+05   
+        50\%    {\ldots}  1.608075e+05  1.614010e+05  1.621690e+05  1.627390e+05   
+        75\%    {\ldots}  2.621595e+05  2.631830e+05  2.641112e+05  2.649178e+05   
+        max    {\ldots}  8.665174e+06  8.704005e+06  8.653878e+06  8.558984e+06   
+        
+                 2019-10-31    2019-11-30    2019-12-31    2020-01-31    2020-02-29  \textbackslash{}
+        count  3.046400e+04  3.046400e+04  3.046400e+04  3.046400e+04  3.046400e+04   
+        mean   2.341255e+05  2.347233e+05  2.353932e+05  2.361603e+05  2.370185e+05   
+        std    2.748821e+05  2.751632e+05  2.759450e+05  2.772066e+05  2.787410e+05   
+        min    1.073700e+04  1.086000e+04  1.103500e+04  1.121800e+04  1.137200e+04   
+        25\%    1.049818e+05  1.052908e+05  1.056270e+05  1.058540e+05  1.061430e+05   
+        50\%    1.634350e+05  1.640095e+05  1.645335e+05  1.650715e+05  1.655705e+05   
+        75\%    2.658900e+05  2.666098e+05  2.674230e+05  2.683828e+05  2.692755e+05   
+        max    8.451378e+06  8.356810e+06  8.303433e+06  8.293072e+06  8.271645e+06   
+        
+                 2020-03-31  
+        count  3.046400e+04  
+        mean   2.378982e+05  
+        std    2.801460e+05  
+        min    1.149200e+04  
+        25\%    1.064082e+05  
+        50\%    1.660700e+05  
+        75\%    2.702558e+05  
+        max    8.221444e+06  
+        
+        [8 rows x 294 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{dates} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \section{Part 1:}\label{part-1}
+
+    Provide an initial data analysis to include (but not limited to): ▪
+Develop time series plots for the following Arkansas metro areas: • Hot
+Springs, Little Rock, Fayetteville, Searcy • Present all values from
+1997 to present • Average at the metro area level
+
+    \subsection{Get the Subset of The Metro
+Areas}\label{get-the-subset-of-the-metro-areas}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{cityOfInterst} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot Springs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Little Rock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fayetteville}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Searcy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{arCity} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{cityOfInterst}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{arCity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} array(['Fayetteville', 'Hot Springs', 'Searcy'], dtype=object)
+\end{Verbatim}
+            
+    \subsubsection{Little Rock Does Not Have a Metro Area Named after
+it}\label{little-rock-does-not-have-a-metro-area-named-after-it}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Little Rock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}       RegionID  SizeRank  RegionName RegionType StateName State         City  \textbackslash{}
+         2610     89442      2628       72204        Zip        AR    AR  Little Rock   
+         3176     89446      3203       72209        Zip        AR    AR  Little Rock   
+         
+                                              Metro      CountyName  1996-01-31  {\ldots}  \textbackslash{}
+         2610  Little Rock-North Little Rock-Conway  Pulaski County     47506.0  {\ldots}   
+         3176  Little Rock-North Little Rock-Conway  Pulaski County     48395.0  {\ldots}   
+         
+               2019-06-30  2019-07-31  2019-08-31  2019-09-30  2019-10-31  2019-11-30  \textbackslash{}
+         2610     72297.0     72162.0     72250.0     72332.0     72976.0     73492.0   
+         3176     73613.0     73328.0     72997.0     72800.0     73261.0     73445.0   
+         
+               2019-12-31  2020-01-31  2020-02-29  2020-03-31  
+         2610     74355.0     75124.0     76106.0     76895.0  
+         3176     73738.0     73768.0     74577.0     75424.0  
+         
+         [2 rows x 300 columns]
+\end{Verbatim}
+            
+    Little Rock Metro area is called Little Rock-North Little Rock-Conway.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{k+kc}{False} \PY{k}{if} \PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{else} \PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Little Rock}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    We append the Little Rock metro area to our dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{arCity} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{arCity}\PY{p}{,} \PY{n}{lr}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{arCity}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:}    RegionID  SizeRank  RegionName RegionType StateName State          City  \textbackslash{}
+         0     69849       215       28314        Zip        NC    NC  Fayetteville   
+         1     89249       332       71913        Zip        AR    AR   Hot Springs   
+         2     69842      1309       28306        Zip        NC    NC  Fayetteville   
+         3     69902      1457       28376        Zip        NC    NC       Raeford   
+         4     69847      1535       28311        Zip        NC    NC  Fayetteville   
+         
+                   Metro         CountyName  1996-01-31  {\ldots}  2019-06-30  2019-07-31  \textbackslash{}
+         0  Fayetteville  Cumberland County     91738.0  {\ldots}    124299.0    124389.0   
+         1   Hot Springs     Garland County     91204.0  {\ldots}    158061.0    158528.0   
+         2  Fayetteville  Cumberland County    113111.0  {\ldots}    159607.0    159496.0   
+         3  Fayetteville        Hoke County         NaN  {\ldots}    178186.0    178673.0   
+         4  Fayetteville  Cumberland County     99811.0  {\ldots}    135627.0    135708.0   
+         
+            2019-08-31  2019-09-30  2019-10-31  2019-11-30  2019-12-31  2020-01-31  \textbackslash{}
+         0    124643.0    124785.0    125022.0    125708.0    126576.0    127449.0   
+         1    159213.0    160118.0    161110.0    161806.0    162347.0    163134.0   
+         2    159711.0    160011.0    160450.0    161232.0    162215.0    163196.0   
+         3    179091.0    179431.0    179704.0    179780.0    179884.0    179991.0   
+         4    136097.0    136413.0    136634.0    137330.0    138309.0    139264.0   
+         
+            2020-02-29  2020-03-31  
+         0    127791.0    128149.0  
+         1    164485.0    166238.0  
+         2    163748.0    164245.0  
+         3    180248.0    180527.0  
+         4    139653.0    140037.0  
+         
+         [5 rows x 300 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{arCity}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} array(['Fayetteville', 'Hot Springs', 'Searcy',
+                'Little Rock-North Little Rock-Conway'], dtype=object)
+\end{Verbatim}
+            
+    \subsection{Only look at 1997 onwards}\label{only-look-at-1997-onwards}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{on97} \PY{o}{=} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{dates} \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1997\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{on97}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} ['1997-01-31', '1997-02-28', '1997-03-31', '1997-04-30', '1997-05-31']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{on97Dates} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{on97}\PY{p}{]} \PY{c+c1}{\PYZsh{} Convert Strings to np.datetime64}
+\end{Verbatim}
+
+
+    \subsection{Group By Metro Area}\label{group-by-metro-area}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{arCityAv} \PY{o}{=} \PY{n}{arCity}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{+}\PY{n}{on97}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nanmean}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{arCityAv}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}                                          1997-01-31     1997-02-28  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          100072.230769  100048.923077   
+         Hot Springs                            77182.600000   77657.400000   
+         Little Rock-North Little Rock-Conway   87378.959184   87692.673469   
+         Searcy                                 57560.583333   57887.666667   
+         
+                                                  1997-03-31     1997-04-30  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          100061.769231  100058.000000   
+         Hot Springs                            77872.800000   77722.000000   
+         Little Rock-North Little Rock-Conway   87890.285714   88178.959184   
+         Searcy                                 58211.000000   58466.000000   
+         
+                                                  1997-05-31     1997-06-30  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          100183.769231  100066.923077   
+         Hot Springs                            77370.400000   77363.800000   
+         Little Rock-North Little Rock-Conway   88397.102041   88617.755102   
+         Searcy                                 58640.083333   58765.833333   
+         
+                                                  1997-07-31     1997-08-31  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          100088.615385  100135.538462   
+         Hot Springs                            77931.200000   78521.000000   
+         Little Rock-North Little Rock-Conway   88776.408163   89037.326531   
+         Searcy                                 58921.583333   59028.333333   
+         
+                                                  1997-09-30     1997-10-31  {\ldots}  \textbackslash{}
+         Metro                                                               {\ldots}   
+         Fayetteville                          100378.076923  100122.692308  {\ldots}   
+         Hot Springs                            79080.400000   78898.800000  {\ldots}   
+         Little Rock-North Little Rock-Conway   89457.693878   89739.448980  {\ldots}   
+         Searcy                                 59160.333333   59267.333333  {\ldots}   
+         
+                                                  2019-06-30     2019-07-31  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          137884.812500  137801.062500   
+         Hot Springs                           130194.714286  130269.714286   
+         Little Rock-North Little Rock-Conway  137957.419355  137967.725806   
+         Searcy                                 87910.222222   88080.166667   
+         
+                                                  2019-08-31     2019-09-30  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          138057.625000  138239.375000   
+         Hot Springs                           130643.285714  131520.857143   
+         Little Rock-North Little Rock-Conway  138232.258065  138562.548387   
+         Searcy                                 87890.888889   87739.555556   
+         
+                                                  2019-10-31     2019-11-30  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          138617.500000  139208.687500   
+         Hot Springs                           132674.000000  133555.714286   
+         Little Rock-North Little Rock-Conway  139092.919355  139401.790323   
+         Searcy                                 87566.888889   87297.888889   
+         
+                                                  2019-12-31     2020-01-31  \textbackslash{}
+         Metro                                                                
+         Fayetteville                          139931.437500  140591.125000   
+         Hot Springs                           134451.857143  135230.142857   
+         Little Rock-North Little Rock-Conway  139585.387097  139714.419355   
+         Searcy                                 86611.722222   86112.388889   
+         
+                                                  2020-02-29     2020-03-31  
+         Metro                                                               
+         Fayetteville                          140992.875000  141523.312500  
+         Hot Springs                           136497.142857  137892.571429  
+         Little Rock-North Little Rock-Conway  139935.032258  140491.000000  
+         Searcy                                 86010.611111   86115.611111  
+         
+         [4 rows x 279 columns]
+\end{Verbatim}
+            
+    \subsection{Plot Time Series}\label{plot-time-series}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{arCityAv}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{on97Dates}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{n}{on97}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{idx}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Part 1 Solution: Arkansas Metro Areas Over Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median House Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} Text(0, 0.5, 'Median House Price')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Part 2:}\label{part-2}
+
+The research question is can we predict which three zip codes provide
+the best investment opportunity for the Syracuse Real Estate Investment
+Trust (SREIT)?
+
+    \subsection{Get Rid Of Columns Before
+1997}\label{get-rid-of-columns-before-1997}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} Index(['RegionID', 'SizeRank', 'RegionName', 'RegionType', 'StateName',
+                'State', 'City', 'Metro', 'CountyName', '1996-01-31',
+                {\ldots}
+                '2019-06-30', '2019-07-31', '2019-08-31', '2019-09-30', '2019-10-31',
+                '2019-11-30', '2019-12-31', '2020-01-31', '2020-02-29', '2020-03-31'],
+               dtype='object', length=300)
+\end{Verbatim}
+            
+    \subsection{Analyze Dataset}\label{analyze-dataset}
+
+    \subsubsection{Check for Duplicates}\label{check-for-duplicates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 1
+\end{Verbatim}
+            
+    There are no duplicate regions.
+
+    \subsubsection{Time Series Plot}\label{time-series-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{on97Dates}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{n}{on97}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{idx}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.legend()}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Zipcodes time series}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median House Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} Text(0, 0.5, 'Median House Price')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Most zipcodes are below a million dollars.
+
+    \subsubsection{Check When all Zipcodes have
+values}\label{check-when-all-zipcodes-have-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{counts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{date} \PY{o+ow}{in} \PY{n}{on97}\PY{p}{:}
+             \PY{n}{counts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{date}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{on97Counts} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{on97}\PY{p}{,} \PY{n}{counts}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Zipcodes Popuated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} Text(0, 0.5, 'Number of Zipcodes Popuated')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{on97Counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}           Date  Count
+         253 2018-02-28  30464
+         254 2018-03-31  30464
+         255 2018-04-30  30464
+         256 2018-05-31  30464
+         257 2018-06-30  30464
+\end{Verbatim}
+            
+    Starting 2018, all zipcodes are finally populated. Since we will be
+predicting the latest date, we do not have to drop any zip codes from
+the analysis. We will have to preprocess some zipcodes since they are
+not fully populated till a certain time. This might lower our accuracy
+in zipcodes that only have data for a small amount of time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{on97Counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2020}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}           Date  Count
+         276 2020-01-31  30464
+         277 2020-02-29  30464
+         278 2020-03-31  30464
+\end{Verbatim}
+            
+    2020 has a total of 30464 zip codes populated.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{on97Counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1997}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}         Date  Count
+         0 1997-01-31  13913
+         1 1997-02-28  13961
+         2 1997-03-31  14019
+\end{Verbatim}
+            
+    1997 only has 13913 zip codes populated..
+
+    \subsection{Look at Counts Per Zip
+Code}\label{look-at-counts-per-zip-code}
+
+    \paragraph{First we need to perform some transformations in the data in
+order to calculate the counts per zip
+code}\label{first-we-need-to-perform-some-transformations-in-the-data-in-order-to-calculate-the-counts-per-zip-code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{dd} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SizeRank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{StateName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Metro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CountyName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{dd} \PY{o}{=} \PY{n}{dd}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{dp} \PY{o}{=} \PY{n}{dd}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{dp}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} RegionID    61639     84654  61637     91982     84616    91940  61616  \textbackslash{}
+         1996-01-31    NaN  364892.0    NaN  200475.0  546663.0  97521.0    NaN   
+         1996-02-29    NaN  364162.0    NaN  200723.0  546231.0  97513.0    NaN   
+         1996-03-31    NaN  363605.0    NaN  200526.0  545451.0  97471.0    NaN   
+         1996-04-30    NaN  362963.0    NaN  199337.0  545391.0  97491.0    NaN   
+         1996-05-31    NaN  361660.0    NaN  198200.0  543066.0  97486.0    NaN   
+         
+         RegionID      91733    93144     84640  {\ldots}  59484  59376  60758  58084  \textbackslash{}
+         1996-01-31  97381.0  82374.0  254388.0  {\ldots}    NaN    NaN    NaN    NaN   
+         1996-02-29  97405.0  82330.0  252774.0  {\ldots}    NaN    NaN    NaN    NaN   
+         1996-03-31  97330.0  82300.0  251468.0  {\ldots}    NaN    NaN    NaN    NaN   
+         1996-04-30  97323.0  82263.0  248948.0  {\ldots}    NaN    NaN    NaN    NaN   
+         1996-05-31  97280.0  82344.0  246695.0  {\ldots}    NaN    NaN    NaN    NaN   
+         
+         RegionID    58112  58111  58115  58117  58121  58125  
+         1996-01-31    NaN    NaN    NaN    NaN    NaN    NaN  
+         1996-02-29    NaN    NaN    NaN    NaN    NaN    NaN  
+         1996-03-31    NaN    NaN    NaN    NaN    NaN    NaN  
+         1996-04-30    NaN    NaN    NaN    NaN    NaN    NaN  
+         1996-05-31    NaN    NaN    NaN    NaN    NaN    NaN  
+         
+         [5 rows x 30464 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{zipCount} \PY{o}{=} \PY{n}{dp}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{(}\PY{n}{zipCount}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7ff26af3c978>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{zipCount}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} count    30464.000000
+         mean       221.713892
+         std         78.132404
+         min         26.000000
+         25\%        170.000000
+         50\%        256.000000
+         75\%        291.000000
+         max        291.000000
+         dtype: float64
+\end{Verbatim}
+            
+    We can see how most of the zipcodes have between 250 to 300 values
+populate in the dataset. Since they have more data, it will likely
+increase its prediction accuracy.
+
+    \subsection{Group Zip Code by Year and Check if there is any
+correlation}\label{group-zip-code-by-year-and-check-if-there-is-any-correlation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{dyear} \PY{o}{=} \PY{n}{dp}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{dyear}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{dyear} \PY{o}{=} \PY{n}{dyear}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{dyear}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dyear}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{dyear} \PY{o}{=} \PY{n}{dyear}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{dyear}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dyear}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,} \PY{n}{dyear}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}
+             
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{600000}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} (-5.0, 600000.0)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We are all aware of the 2008 housing crisis which lowered the price of
+the housing market significatly. In the chart above, we see a huge drop
+among a big subset of zipcodes. Now because of the lack of computing
+power and the since this drop can cause a lack of accuracy, we will only
+fit the models with data past a certain date. On 2010, we see the data
+start to plateu, but around 2011, it started going back up again.
+Therefore, we will use 2011 as our lower limit for the modeling.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{lowerDataLim} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2011\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Split Train and Test
+Dataset}\label{split-train-and-test-dataset}
+
+    In order to create the model we need to create a training set and a test
+set. The test set is going to be the most recent date as the target
+while the training dataset is going to use the data from 6 months prior
+as the target.
+
+    \subsubsection{Find the most recent
+date.}\label{find-the-most-recent-date.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{testDate} \PY{o}{=} \PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Date on Dataset: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{testDate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Date on Dataset:  2020-03-31 00:00:00
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{trainDate} \PY{o}{=} \PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{timedelta64}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{trainDate} \PY{o}{=} \PY{n}{on97Counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{on97Counts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{trainDate}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Target Date on Dataset: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{trainDate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Target Date on Dataset:  2019-09-30T00:00:00.000000000
+
+    \end{Verbatim}
+
+    \subsection{Create Facebook Profet
+Model}\label{create-facebook-profet-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k+kn}{from} \PY{n+nn}{fbprophet} \PY{k}{import} \PY{n}{Prophet}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ERROR:fbprophet:Importing plotly failed. Interactive plots will not work.
+
+    \end{Verbatim}
+
+    \subsubsection{Convert Dataset To Prophet
+Format}\label{convert-dataset-to-prophet-format}
+
+    To input the data to the prophet, we need to convert the Data Frame into
+a friendly format for the prophet to work.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{dp}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{k+kc}{None} \PY{c+c1}{\PYZsh{} Get rid of column name}
+         \PY{n}{dp}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{} Convert Date columns to ds}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{zipCodes} \PY{o}{=} \PY{n}{dp}\PY{o}{.}\PY{n}{columns} \PY{c+c1}{\PYZsh{} Get list of Zip Codes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{zipCodes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{zipCodes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{dp} \PY{o}{=} \PY{n}{dp}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} Make Date a column rather than the index}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{dp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Create Data Frame with Predicted
+Values}\label{create-data-frame-with-predicted-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{future} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{trainDate}\PY{p}{,} \PY{n}{testDate}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{future}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:}           ds
+         0 2019-09-30
+         1 2020-03-31
+\end{Verbatim}
+            
+    \subsubsection{Fit Model Using The Target Training
+Date}\label{fit-model-using-the-target-training-date}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{dp} \PY{o}{=} \PY{n}{dp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{dp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{trainDate}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{dp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{lowerDataLim}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} Get subset of data used to train the model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n+nb}{zip} \PY{o+ow}{in} \PY{n}{zipCodes}\PY{p}{:}
+             \PY{n}{m} \PY{o}{=} \PY{n}{Prophet}\PY{p}{(}\PY{n}{uncertainty\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{interval\PYZus{}width}\PY{o}{=}\PY{l+m+mf}{0.95}\PY{p}{,} \PY{n}{weekly\PYZus{}seasonality}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{daily\PYZus{}seasonality}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} Define Prophet Model For Zip Code}
+         
+             \PY{n}{dtemp} \PY{o}{=} \PY{n}{dp}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{zip}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{n+nb}{zip}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Convert columns to Prophet\PYZhy{}friendly columns }
+             \PY{n}{dtemp} \PY{o}{=} \PY{n}{dtemp}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Drop unpopulated dates}
+           
+             \PY{n}{m}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{dtemp}\PY{p}{)} \PY{c+c1}{\PYZsh{} Fit series}
+         
+             \PY{n}{preds} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{future}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yhat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{c+c1}{\PYZsh{} Predict the train date and test date values}
+         
+           
+             \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n+nb}{zip}\PY{p}{,} \PY{n}{dtemp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{dtemp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{trainDate}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} 
+                               \PY{n}{preds}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yhat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{preds}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yhat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} append data to the file dataset}
+           
+             \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} 2500
+\end{Verbatim}
+            
+    \subsection{Calucate Accuracy and Opportunity of
+Growth}\label{calucate-accuracy-and-opportunity-of-growth}
+
+    \subsubsection{Create DataFrame with Zip Code
+information}\label{create-dataframe-with-zip-code-information}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{zipPred} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Create Dataframe with predictions per zipcode}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{} zipPred.to\PYZus{}csv(path + \PYZsq{}PredictionData.csv\PYZsq{}) \PYZsh{} Save Prediction to a CSV file since we do not want to run model more than once}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{zipPred} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{path} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all\PYZus{}preds.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{zipPred}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:}    Unnamed: 0  Unnamed: 0.1  zipcode     train     train\_pred      test\_pred
+         0           0             0    99896  170972.0  171056.661470  175758.447514
+         1           1             1    99897  288141.0  288810.105902  300880.428270
+         2           2             2    99898  345708.0  347049.233058  361007.685087
+         3           3             3    99899  187753.0  186323.733684  193046.967531
+         4           4             4    99900  169052.0  169479.033910  178694.019347
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{zipPred}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+30464
+
+    \end{Verbatim}
+
+    \subsubsection{Calcualte Error In Training
+Prediction}\label{calcualte-error-in-training-prediction}
+
+    By Calculating the error in the training prediction, we can find out the
+risk associated with investing in a specific zipcode. If a zipcode is
+volatile, the prediction will have a high error. Therefore, if we see a
+high prediction on the training target date, we should be causious in
+investing there. On the other hand, if the prediction is very accurate,
+the risk factor shoudl be greatly reduced.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsubsection{Calculate Growth
+Percentage}\label{calculate-growth-percentage}
+
+    The growth percentage comes from the test target date. We want to see if
+there is any potential growth in the zipcode. To do this, we use the
+model's prediction for six months from the training target date. Then we
+get the percentage increased or decreased. We want to avoid all
+decreased growth. Conversely, we want the most return possible from an
+investment which would be indicated by a big percentage increase or a
+high percent growth.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \section{Find the Best Zip Codes}\label{find-the-best-zip-codes}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Growth Percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} Text(0, 0.5, 'Growth Percentage')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_110_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Growth Percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{348}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{348}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:} (-1.0, 15.0)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_111_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The chart above shows us the best zipcodes. The closest to the x-axis
+and the farthest up corresponds to the zipcodes that we should be
+investing in since there is almost no risk and there is a big growth
+opportunity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} count    30464.000000
+         mean        -0.210522
+         std          1.347398
+         min        -13.524418
+         25\%         -0.755930
+         50\%         -0.122969
+         75\%          0.388458
+         max          9.779789
+         Name: trainError, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{zipPred}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{09}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.09}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:}        Unnamed: 0  Unnamed: 0.1  zipcode    train  train\_pred     test\_pred  \textbackslash{}
+         20761       20996           253    92440  65473.0     65473.0  75733.108783   
+         5945         5945           631    86144  70463.0     70463.0  81134.813276   
+         7125         7125          1811    87700  51992.0     51992.0  59541.848612   
+         
+                  trainError  GrowthPerc  
+         20761  9.557105e-13   15.670748  
+         5945   0.000000e+00   15.145272  
+         7125  -6.997190e-14   14.521174  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{best3} \PY{o}{=} \PY{n}{zipPred}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{09}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.09}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{zipPred}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{best3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trainError}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{best3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GrowthPerc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Growth Percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{348}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{348}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} (4.0, 15.0)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_116_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To find the best zipcodes, we first take a look at the subset with the
+smallest risk or the training error closest to 0. Then we sort by the
+Growth Percentage in Descending order and we are left with 3 zipcodes.
+
+    \subsection{Conclusion}\label{conclusion}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n+nb}{zip} \PY{o+ow}{in} \PY{n}{best3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             
+             \PY{n}{temp} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{zip}\PY{p}{]}
+             
+             \PY{n}{dateL} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{dateS} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{on97}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{zip}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{dateS}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+                     \PY{n}{dateL}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{datetime64}\PY{p}{(}\PY{n}{col}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dateL}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RegionID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{zip}\PY{p}{]}\PY{p}{[}\PY{n}{dateS}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n+nb}{zip}\PY{p}{)}
+             
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{trainDate}\PY{p}{,} \PY{n}{trainDate}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{200000}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train test split}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} <matplotlib.legend.Legend at 0x7ff25e016470>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_119_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When we compare to the actual growth in six months, we actually see that
+the only one out of the three zipcode candidates actually improved in
+median house hold prices. Therefore, we would have ended up in a loss.
+It is also important to note that the loses started happenning once the
+pandemic started, so it is an unpredictable event. Otherwise before
+2020, the median household prices kept increasing.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,136 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Week 1 Intro
+
+
+In this first week of the course, we will review some essential statistical terms and concepts including the mean, the median, the mode, the range, variance, the standard deviation, and two types of distributions: the normal distribution and the Poisson distribution. 
+
+All of these terms help us think about and summarize individual vectors (lists) of numbers—what statisticians and computer scientists call variables. For this reason, most of the concepts from this week fall under the umbrella of univariate descriptive statistics. In other words, we are using statistics to describe single variables. 
+
+Single variables are the main building blocks of larger statistical data sets, and while you can learn a lot from just looking at one variable at a time, most of the fun of playing with data comes from looking at two or more variables together. In Week 2, we will look at some of the ideas behind probability and, as you will see, probability launches us into thinking about two variables together.
+
+
+## 1.3: Math Functions
+
+```{r}
+2+2
+```
+
+```{r}
+x <- 10
+```
+
+```{r}
+x
+```
+
+```{r tags=c()}
+head(Orange)
+```
+
+```{r}
+# install.packages("ggplot2")
+```
+
+```{r}
+library("ggplot2")
+```
+
+```{r}
+ggplot(Orange, aes(x=age, y=circumference)) + geom_point(aes(color = Tree, size=20))
+```
+
+## 1.5: Run Your First Command in R
+
+```{r}
+x <- c(0,0,0,0,2,3,4,5)
+```
+
+```{r}
+mean(x)
+```
+
+```{r}
+# install.packages("modeest")
+library(modeest)
+mfv(discoveries)
+```
+
+```{r}
+?discoveries
+```
+
+## 1.7: Connections Between Concepts of Variability
+
+```{r}
+library('readxl')
+df <- read_excel("chapter1dispersiondemo.xlsx")
+```
+
+```{r}
+df
+```
+
+## 1.8: Use R to Calculate the Standard Deviation
+
+```{r}
+votes <- c(200, 300, 400)
+(votes - mean(votes))
+sum( (votes-mean(votes)) ^ 2)
+sum( (votes-mean(votes)) ^ 2)/ length(votes)
+```
+
+```{r}
+votes1 <- c(200, 300, 400)
+votes2 <- c(299, 300, 301)
+
+sqrt(sum( (votes1-mean(votes1)) ^ 2)/ length(votes1))
+sqrt(sum( (votes2-mean(votes2)) ^ 2)/ length(votes2))
+```
+
+```{r}
+sd(discoveries)
+var(discoveries)
+mean(discoveries)
+range(discoveries)
+```
+
+## 1.9: Identify Shapes of Certain Basic Distributions
+
+```{r}
+hist(rnorm(n=120, mean=85, sd=5))
+hist(rnorm(n=120, mean=85, sd=15))
+```
+
+```{r}
+hist(runif(n=120, min=50, max=80))
+hist(runif(n=12000, min=50, max=80))
+```
+
+```{r}
+hist(rpois(n=120, lambda=3))
+hist(rpois(n=120, lambda=30))
+hist(rpois(n=1200, lambda=3))
+hist(rpois(n=1200, lambda=30))
+```
+
+```{r}
+
+```
+
+```{r}
+
+```

@@ -1,0 +1,72 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Exercise 7
+
+```{r}
+str(PlantGrowth)
+summary(PlantGrowth)
+?PlantGrowth
+```
+
+```{r}
+summary(PlantGrowth)
+```
+
+The summary command returns high level statistics of the two columns weight and group in the PlantGrowth dataframe. We can see how the weight column is a numeric column that ranges from 3.59 to 6.31. The group column is a non-numeric column that contains three groups: ctrl=control group, trt1=test1, and trt2=test2 where each group has ten entries.
+
+```{r}
+library(ggplot2)
+ggplot(PlantGrowth, aes(x = weight)) +
+  geom_histogram(aes(color = group, fill = group), bins = 5)
+```
+
+```{r}
+hist(PlantGrowth$weight[PlantGrowth$group=='ctrl'])
+hist(PlantGrowth$weight[PlantGrowth$group=='trt1'])
+hist(PlantGrowth$weight[PlantGrowth$group=='trt2'])
+```
+
+It's hard to make any conclusions from the three histograms as they all have different x axis'. The main difference is that the center of each histogram is different for trt1 compared to the rest. Group trt1 shows a majority of its weight below 5 while other groups are closer to 5.5.
+
+
+# Exercise 8
+
+```{r}
+boxplot(weight ~ group, data=PlantGrowth) # Boxplot of mpg, group by am
+```
+
+The trt1 has a higher variation than the rest of the groups. It's lower half is the lowest of the 3 groups. Group trt2 has the distribution with the highest center. It all of its data lies past 75% of the weights in group trt1 while at least 50% of its data lies past 75% of the weights in the ctrl group. 
+
+
+# Exercise 9
+
+```{r}
+t.test(PlantGrowth$weight[ PlantGrowth$group == 'ctrl' ], PlantGrowth$weight[ PlantGrowth$group == 'trt1'])
+```
+
+The confidence interval of the t-test above means that out of 100 replications of the study, 95% of the confidence intervals would contain the mean difference. I.e., the mean difference of the weight between crtl and trt1 will be within ~-.29 and ~1 95 out of 100 replications of the study.
+
+
+The results of the T-Test also means that in a 95% significance level, we cannot reject the null hypothesis (H0 = both distributions have a different mean). 
+
+
+# Exercise 10
+
+```{r}
+t.test(PlantGrowth$weight[ PlantGrowth$group == 'ctrl' ], PlantGrowth$weight[ PlantGrowth$group == 'trt2'])
+```
+
+The mean difference of the weight between crtl and trt12 will be within ~.5 and ~5.5 95 out of 100 replications of the study. The T-Test result also tells us that with a 95% significance level, we reject the null hypothesis. I.e., 95% of the studies will find that the means of the two groups are different from each other.

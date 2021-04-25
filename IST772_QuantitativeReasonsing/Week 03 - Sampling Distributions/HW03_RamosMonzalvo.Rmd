@@ -1,0 +1,139 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Exercise 2
+
+```{r}
+?ChickWeight
+```
+
+```{r}
+str(ChickWeight)
+```
+
+```{r}
+summary(ChickWeight)
+```
+
+The four variables / columns are weight, Time, Chick and Diet.
+
+```{r}
+dim(ChickWeight)
+```
+
+The first number in the dim(ChickWeight) command referes to the number of rows in the ChickWeight dataframe. This means that there is a total of 578 records done in the experiment. There are 578 unique rows where each row has a unique combinations of a chick with a specific diet at one time interval. 
+
+
+# Exercise 3
+
+```{r}
+summary(ChickWeight$weight)
+```
+
+The summary command gives us the high level statistics of the weight column in the ChickWeight dataframe.
+
+```{r}
+head(ChickWeight$weight)
+```
+
+The head command gives us the first 5 values of the weight column in the ChickWeight dataframe.
+
+```{r}
+mean(ChickWeight$weight)
+```
+
+The mean command gives us the high average of the weight column in the ChickWeight dataframe.
+
+```{r}
+myChkWts <- ChickWeight$weight
+```
+
+The command above saves the weight column from the ChickWeight into a variable called myChkWts
+
+```{r}
+quantile(myChkWts, 0.50)
+```
+
+The quantile command above returns the 50% quantile (the median) of the myChkWts variable. I.e., it returns the median weight of the chicks dataframe.
+
+
+# Exercise 4
+
+```{r}
+myChkWts <- ChickWeight$weight
+```
+
+```{r}
+quantile(myChkWts, .025)
+quantile(myChkWts, .975)
+```
+
+```{r}
+summary(myChkWts)
+```
+
+```{r}
+hist(myChkWts)
+abline(v=quantile(myChkWts, .975), col="red")
+abline(v=quantile(myChkWts, .025), col="red")
+abline(v=mean(myChkWts), col="green")
+abline(v=quantile(myChkWts, .5), col="red")
+```
+
+The variable myChWts looks like a poisson distribution as most of the weights fall into the 50-100 bucket, and it has a much longer tail on the right side of the median. The median is 103 which means 50% of the weights lie before 103. The mean is 121.8 which means on average the weight of a chick is about 121.8. The 2.5% quantile is 41 and the 97.5% quatile is 294.575 which means that 95% of the data lies between these two points.
+
+
+# Exercise 5
+
+```{r}
+chkWtsSamMeanDist <- replicate(n=1000, mean(sample(myChkWts, size=11, replace=TRUE)))
+```
+
+```{r}
+hist(chkWtsSamMeanDist)
+abline(v=quantile(chkWtsSamMeanDist, .975), col="red")
+abline(v=quantile(chkWtsSamMeanDist, .025), col="red")
+```
+
+# Exercise 6
+
+
+The main difference between a distribution of raw data and the distribution of a sampling of means is that the distribution of raw data will not always be a normal distribution while the sampling of means will always be a normal distribution as the number of means increases. The sampling of means returns a description of how the mean of the raw data is distributed.
+
+
+The 2.5% and the 97.5% quantiles are very different from each other as the sampling of means centers around the raw input mean while the raw data quantiles center around the median of the data.
+
+
+# Exercise 7
+
+```{r}
+chkWtsSamMeanDist_n100 <- replicate(n=1000, mean(sample(myChkWts, size=100, replace=TRUE)))
+```
+
+```{r}
+mean(chkWtsSamMeanDist)
+```
+
+```{r}
+mean(chkWtsSamMeanDist_n100)
+```
+
+```{r tags=c()}
+hist(chkWtsSamMeanDist_n100)
+abline(v=quantile(chkWtsSamMeanDist_n100, .975), col="red")
+abline(v=quantile(chkWtsSamMeanDist_n100, .025), col="red")
+```
+
+Even though both of the distributions have a center close to 120, the sampling distribution with n=100 has a higher confidence since the sample size is bigger. This means that the 2.5% and 97.5% quantiles will be more tightly bound.

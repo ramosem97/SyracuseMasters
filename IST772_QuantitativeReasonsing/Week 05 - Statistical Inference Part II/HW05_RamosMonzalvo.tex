@@ -1,0 +1,385 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+The homework for week five is exercises 6 through 10 on pages 86 and 87.
+
+\hypertarget{exercise-6}{%
+\section{Exercise 6}\label{exercise-6}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  The PlantGrowth data set contains three different groups, with each
+  representing various plant food diets (you may need to type
+  data(PlantGrowth) to activate it). The group labeled ``ctrl'' is the
+  control group, while ``trt1'' and ``trt2'' are different types of
+  experimental treatment. As a reminder, this subsetting statement
+  accesses the weight data for the control group:
+  PlantGrowth\(weight[PlantGrowth\)group==''ctrl''{]} and this
+  subsetting statement accesses the weight data for treatment group 1:
+  PlantGrowth\(weight[PlantGrowth\)group==''trt1''{]} Run a t‐test to
+  compare the means of the control group (``ctrl'') and treatment group
+  1 (``trt1'') in the PlantGrowth data. Report the observed value of t,
+  the degrees of freedom, and the p‐value associated with the observed
+  value. Assuming an alpha threshold of .05, decide whether you should
+  reject the null hypothesis or fail to reject the null hypothesis. In
+  addition, report the upper and lower bound of the confidence interval.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ PlantGrowth}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    30 obs. of  2 variables:
+##  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+##  $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   weight group
+## 1   4.17  ctrl
+## 2   5.58  ctrl
+## 3   5.18  ctrl
+## 4   6.11  ctrl
+## 5   4.50  ctrl
+## 6   4.61  ctrl
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}ctrl\textquotesingle{}}\NormalTok{ ], df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}trt1\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  df$weight[df$group == "ctrl"] and df$weight[df$group == "trt1"]
+## t = 1.1913, df = 16.524, p-value = 0.2504
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.2875162  1.0295162
+## sample estimates:
+## mean of x mean of y 
+##     5.032     4.661
+\end{verbatim}
+
+The t value is 1.1913. The degree of freedom is 16.524. The p-value is
+0.2504. Since the alpha value is .05, then we would fail to reject the
+null hypothesis because alpha is smaller than the p-value.
+
+The confidence interval is (-.2875, 1.0295) where -.2875 is the lower
+bound and 1.0295 is the upper bound.
+
+\hypertarget{exercise-7}{%
+\section{Exercise 7}\label{exercise-7}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Install and library() the BEST package. Note that you may need to
+  install a program called JAGS onto your computer before you try to
+  install the BEST package inside of R. Use BESTmcmc() to compare the
+  PlantGrowth control group (``ctrl'') to treatment group 1 (``trt1'').
+  Plot the result and document the boundary values that BESTmcmc()
+  calculated for the HDI. Write a brief definition of the meaning of the
+  HDI and interpret the results from this comparison.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages(\textquotesingle{}BEST\textquotesingle{})}
+\FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}BEST\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: HDInterval
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plantBest }\OtherTok{\textless{}{-}} \FunctionTok{BESTmcmc}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}ctrl\textquotesingle{}}\NormalTok{ ], df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}trt1\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Waiting for parallel processing to complete...done.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(plantBest)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW05_RamosMonzalvo_files/figure-latex/unnamed-chunk-6-1.pdf}
+The Highest Density Interval (HDI) lets us know which values in the
+distribution are the most likely, i.e., which values show up the most in
+the distribution.
+
+The lower and upper limits from the HDI are -0.365 and 1.13 repectively.
+This gives us a similar result as the t-test where we do not reject the
+null. This means that we do not have enough information to conclude that
+the means in both distributions are different from each other.
+
+\hypertarget{exercise-8}{%
+\section{Exercise 8}\label{exercise-8}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Compare and contrast the results of Exercise 6 and Exercise 7. You
+  have three types of evidence: the results of the null hypothesis test,
+  the confidence interval, and the HDI from the BESTmcmc() procedure.
+  Each one adds something, in turn, to the understanding of the
+  difference between groups. Explain what information each test provides
+  about the comparison of the control group (``ctrl'') and the treatment
+  group 1 (``trt1'').
+\end{enumerate}
+
+The t-test and the HDI gave us similar results where we cannot conclude
+any differene between the means from the two groups in the Plant Growth
+dataset. On the other hand, the most likely values are different from
+each other. In the HDI, the mean is .388 while in the CDI it is .371.
+Therefore, they are centered around different numbers. Another
+difference is the range of the intervals. The HDI is wider than the CDI
+which means it is less certain about the most likely value.
+
+\hypertarget{exercise-9}{%
+\section{Exercise 9}\label{exercise-9}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Using the same PlantGrowth data set, compare the ``ctrl'' group to the
+  ``trt2'' group. Use all of the methods described earlier (t‐test,
+  confidence interval, and Bayesian method) and explain all of the
+  results.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}ctrl\textquotesingle{}}\NormalTok{ ], df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}trt2\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  df$weight[df$group == "ctrl"] and df$weight[df$group == "trt2"]
+## t = -2.134, df = 16.786, p-value = 0.0479
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.98287213 -0.00512787
+## sample estimates:
+## mean of x mean of y 
+##     5.032     5.526
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plantBest }\OtherTok{\textless{}{-}} \FunctionTok{BESTmcmc}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}ctrl\textquotesingle{}}\NormalTok{ ], df}\SpecialCharTok{$}\NormalTok{weight[ df}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \StringTok{\textquotesingle{}trt2\textquotesingle{}}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Waiting for parallel processing to complete...done.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(plantBest)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW05_RamosMonzalvo_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Comparing the control group against the trt2 group gives very different
+results in the HDI and the CDI. The HDI's interval contains 0 while the
+CDI does not. This means that the CDI rejects the null hypothesis while
+the HDI does not. The t-test also rejects the null hypothesis. The HDI
+while shifted to the left has a mean of -.485 which means it is leaning
+to the trt2 having a higher mean, but it is still not confident enough
+to say there is a difference between the two.
+
+\hypertarget{exercise-10}{%
+\section{Exercise 10}\label{exercise-10}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Consider this t‐test, which compares two groups of n = 100,000
+  observations each:
+  t.test(rnorm(100000,mean=17.1,sd=3.8),rnorm(100000,mean=17.2,sd=3.8))
+\end{enumerate}
+
+For each of the groups, the rnorm() command was used to generate a
+random normal distribution of observations similar to those for the
+automatic transmission group in the mtcars database (compare the
+programmed standard deviation for the random normal data to the actual
+mtcars data). The only difference between the two groups is that in the
+first rnorm() call, the mean is set to 17.1 mpg and in the second it is
+set to 17.2 mpg. I think you would agree that this is a negligible
+difference, if we are discuss‐ ing fuel economy. Run this line of code
+and comment on the results of the t‐test. What are the implications in
+terms of using the NHST on very large data sets?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100000}\NormalTok{,}\AttributeTok{mean=}\FloatTok{17.1}\NormalTok{,}\AttributeTok{sd=}\FloatTok{3.8}\NormalTok{),}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100000}\NormalTok{,}\AttributeTok{mean=}\FloatTok{17.2}\NormalTok{,}\AttributeTok{sd=}\FloatTok{3.8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  rnorm(1e+05, mean = 17.1, sd = 3.8) and rnorm(1e+05, mean = 17.2, sd = 3.8)
+## t = -6.3828, df = 2e+05, p-value = 1.743e-10
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.14174098 -0.07514204
+## sample estimates:
+## mean of x mean of y 
+##  17.10242  17.21086
+\end{verbatim}
+
+The t-test is extremely confident that the two distributions have a
+different mean. This is partly because having a huge dataset will almost
+always result in a difference in the mean since the confidence increases
+as you add more datapoints.
+
+\end{document}

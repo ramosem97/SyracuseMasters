@@ -1,0 +1,54 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.11.1
+  kernelspec:
+    display_name: R
+    language: R
+    name: ir
+---
+
+# Week 2 Intro
+
+
+When we are presented with a new piece of information about a probability scenario, how does it change what we believe? Adding a piece of information, such as what server we have or what day it is, lets us refine our understanding of what is going on. We can use our prior understanding of the probabilities of certain outcomes in combination with new evidence to develop a more highly refined posterior set of probabilities. 
+
+This thinking is at the heart of the Bayesian statistical techniques that are now becoming popular. Through the rest of the course, when we look at the logic of statistical inference we will use this Bayesian thinking as one method of considering what our evidence tells us about the relative likelihoods of different outcomes. This week, we will use simple contingency tables that summarize a set of events as a way of reasoning about probability.
+
+
+# 2.5: Plotting Random Distributions
+
+```{r}
+rbin <- rbinom(n=100, size=6, prob=.5)
+rbin
+```
+
+```{r}
+hist(rbin)
+```
+
+```{r}
+probTable <- table(rbin)
+probTable/100
+```
+
+```{r}
+barplot(cumsum(probTable/100))
+```
+
+# 2.6 Histograms, Tables and Barplots
+
+```{r}
+barplot(table(c(1,1,2,2,2)))
+```
+
+# 2.7: Cumulative Probabilities
+
+```{r}
+table( rbinom(n=100000, size=6, prob=0.5) )/100000
+```
